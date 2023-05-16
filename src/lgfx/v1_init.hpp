@@ -55,6 +55,7 @@ Contributors:
 // other
 #include "v1/panel/Panel_HUB75.hpp"
 #include "v1/panel/Panel_M5UnitLCD.hpp"
+#include "v1/panel/Panel_SSD2828.hpp"
 
 // TouchScreen
 #include "v1/touch/Touch_FT5x06.hpp"
