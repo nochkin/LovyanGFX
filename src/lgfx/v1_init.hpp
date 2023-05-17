@@ -34,6 +34,7 @@ Contributors:
 #include "v1/panel/Panel_ILI9341.hpp"
 #include "v1/panel/Panel_ILI9342.hpp"
 #include "v1/panel/Panel_ILI948x.hpp"
+#include "v1/panel/Panel_LT768x.hpp"
 #include "v1/panel/Panel_NT35510.hpp"
 #include "v1/panel/Panel_R61529.hpp"
 #include "v1/panel/Panel_RA8875.hpp"
