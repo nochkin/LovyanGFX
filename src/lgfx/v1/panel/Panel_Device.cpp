@@ -147,15 +147,33 @@ namespace lgfx
       uint8_t cmd = *addr++;
       uint8_t num = *addr++;   // Number of args to follow
       if (cmd == 0xFF && num == 0xFF) break;
+      uint8_t reg_data = 0;
+      uint8_t data = 0;
+      uint8_t bit_mask = 0;
       writeCommand(cmd, 1);  // Read, issue command
       _bus->flush();
       uint_fast8_t ms = num & CMD_INIT_DELAY;       // If hibit set, delay follows args
+      uint_fast8_t bit_set = num & CMD_INIT_BIT_SET;
+      uint_fast8_t bit_reset = num & CMD_INIT_BIT_RESET;
       num &= ~CMD_INIT_DELAY;          // Mask out delay bit
+      num &= ~CMD_INIT_BIT_SET;
+      num &= ~CMD_INIT_BIT_RESET;
       if (num)
       {
         do
         {                   // For each argument...
-          writeData(*addr++, 1);  // Read, issue argument
+          data = *addr++;
+          _bus->beginRead();
+          if (bit_set || bit_reset) {
+            reg_data = _bus->readData(1);
+          }
+          _bus->endRead();
+          if (bit_set) {
+            data = reg_data | data;
+          } else if (bit_reset) {
+            data = reg_data & ~data;
+          }
+          writeData(data, 1);  // Read, issue argument
           _bus->flush();
         } while (--num);
       }

@@ -157,6 +157,8 @@ namespace lgfx
   protected:
 
     static constexpr uint8_t CMD_INIT_DELAY = 0x80;
+    static constexpr uint8_t CMD_INIT_BIT_SET = 0x40;
+    static constexpr uint8_t CMD_INIT_BIT_RESET = 0x20;
 
     config_t _cfg;
 
